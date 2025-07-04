@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stylish Bio & Name Generator + YouTube Downloader</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f4ff, #e0f7fa);
+      margin: 0; padding: 0;
+    }
+    header {
+      background: linear-gradient(135deg, #5C6BC0, #7C4DFF);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      gap: 2rem;
+    }
+    .tool {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background: #5C6BC0;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #3f51b5;
+    }
+    .output {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f4f4f4;
+      border-left: 5px solid #5C6BC0;
+      border-radius: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>hanifx Stylish Toolkit</header>
+  <main>
+    <div class="tool">
+      <h2>✨ Unlimited Stylish Bio Generator</h2>
+      <button onclick="generateBio()">Generate Bio</button>
+      <div class="output" id="bio-output"></div>
+    </div>
+
+    <div class="tool">
+      <h2>🎨 Unlimited Stylish Name Generator</h2>
+      <input type="text" id="name-input" placeholder="Enter your name" />
+      <button onclick="generateName()">Generate Stylish Name</button>
+      <div class="output" id="name-output"></div>
+    </div>
+
+    <div class="tool">
+      <h2>📥 YouTube Video Downloader</h2>
+      <input type="text" id="video-link" placeholder="Enter YouTube video link" />
+      <button onclick="downloadVideo()">Download</button>
+      <div class="output" id="video-output"></div>
+    </div>
+  </main>
+
+  <script>
+    Array.prototype.random = function () {
+      return this[Math.floor(Math.random() * this.length)];
+    };
+
+    const emojis = ['✨', '🌙', '💔', '⚡', '🔥', '💫', '🥀', '😎', '🎯', '💀', '🕊️', '🧠', '🌌', '☁️', '☯️', '👑', '💎', '🌀', '🌪️'];
+    const verbs = ['dreaming', 'falling', 'rising', 'hiding', 'fighting', 'burning', 'fading', 'flying', 'haunting', 'shining', 'wandering'];
+    const adjectives = ['silent', 'broken', 'lost', 'strong', 'wild', 'lonely', 'royal', 'hidden', 'ghostly', 'mystic', 'vengeful', 'timeless'];
+    const nouns = ['soul', 'flame', 'truth', 'shadow', 'storm', 'night', 'pain', 'hope', 'destiny', 'vision', 'vibe', 'kingdom'];
+
+    function generateBio() {
+      const emoji = emojis.random();
+      const line = `${emoji} The ${adjectives.random()} ${nouns.random()} is ${verbs.random()} within me.`;
+      document.getElementById('bio-output').innerText = line;
+    }
+
+    const symbols = ['★','✧','☬','❖','➤','✿','꧁','༒','『','』','♛','♞','♔','⛧','☠','💎','🕊️','✪','♜','⚔️','♤','♧','◇','♢','🔥','🌟','💫','🌀','🎭','👑','😈','😇','🌈','☯️','🔱','🧿','⚡','🌌','🔮','🛡️'];
+    const formats = [
+      n => `꧁༒☬ ${n.toUpperCase()} ☬༒꧂`,
+      n => `『${n.split('').join(' ')}』`,
+      n => `★彡[${n}]彡★`,
+      n => `${n}ツ`,
+      n => `×º°”˜${n}˜”°º×`,
+      n => `•´¯${n}¯•`,
+      n => `【${n}】`,
+      n => `◥☬${n}☬◤`,
+      n => `${symbols.random()} ${n.toLowerCase()} ${symbols.random()}`,
+      n => `${n.charAt(0).toUpperCase()}${n.slice(1)}_${Math.floor(Math.random() * 1000)}${symbols.random()}`,
+      n => `${symbols.random()} ${n.split('').reverse().join('')} ${symbols.random()}`
+    ];
+
+    function generateName() {
+      const name = document.getElementById('name-input').value.trim();
+      if (!name) return alert('Enter your name!');
+      const styled = formats.random()(name);
+      document.getElementById('name-output').innerText = styled;
+    }
+
+    function downloadVideo() {
+      const link = document.getElementById('video-link').value.trim();
+      if (!link.includes("youtube.com") && !link.includes("youtu.be")) {
+        document.getElementById("video-output").innerText = "Invalid YouTube URL.";
+        return;
+      }
+      const encoded = encodeURIComponent(link);
+      const url = `https://ssyoutube.online/download?url=${encoded}`;
+      window.open(url, '_blank');
+      document.getElementById("video-output").innerHTML = `Opening: <a href="${url}" target="_blank">${url}</a>`;
+    }
+  </script>
+</body>
+                                                              </html>
